@@ -1,9 +1,10 @@
 const connection = require("./connection");
-
+// class db that holds all the methods for the queries
 class db {
   constructor(connection) {
     this.connection = connection;
   }
+  // find all departments, roles, employees and join them together to display all the information in a table 
   findAllDepartments() {
     return this.connection.promise().query("SELECT * FROM department");
   }
@@ -21,6 +22,7 @@ class db {
     FROM
     employee LEFT JOIN roles ON employee.role_id = roles.id LEFT JOIN department ON roles.department_id = department.id LEFT JOIN employee manager ON manager.id = employee.manager_id`);
 }
+// methods for adding a deparment, role, and employee to the database which are then inserted into the table
 addADepartment(departmentName) {
     return this.connection
       .promise()
@@ -39,6 +41,7 @@ addADepartment(departmentName) {
       .promise()
       .query("INSERT INTO employee SET ?", answer);
   }
+  // methods for updating and employess role and manager 
   updateAnEmployeeRole(roleId, employeeId) {
     return this.connection
       .promise()
@@ -52,6 +55,7 @@ addADepartment(departmentName) {
       .promise()
       .query("UPDATE employee SET employee.manager_id = ? WHERE id = ?", [managerId, employeeId]);
   }  
+  // method for finding managers and emplyees by manager and department 
   findAllManagers(employeeId) {
       return this.connection.promise().query("SELECT * FROM employee WHERE id != ?", [employeeId]);
   }
@@ -64,6 +68,7 @@ addADepartment(departmentName) {
     FROM employee LEFT JOIN roles on employee.role_id = roles.id LEFT JOIN department on roles.department_id = department.id
     WHERE department.id = ?`, [departmentId]);
   }
+  //methods for deleting a department, role, and employee from the database
   deleteADepartment(departmentId) {
     return this.connection.promise().query("DELETE FROM department WHERE id = ?", [departmentId]);
   }
@@ -75,9 +80,10 @@ addADepartment(departmentName) {
   deleteAnEmployee(employeeId) {
     return this.connection.promise().query("DELETE FROM employee WHERE id = ?", [employeeId]);
   }
+  //method that finds the total budget of a department whidh is the sum of all the salaries of the employees in that department
   findDepartmentBudget() {
     return this.connection.promise().query("SELECT department.name AS department, department.id, SUM(salary) AS total_salary FROM employee LEFT JOIN roles on employee.role_id = roles.id LEFT JOIN department on roles.department_id = department.id GROUP BY department.id");
   }
 }
-
+// export the db class
 module.exports = new db(connection);

@@ -1,8 +1,26 @@
 {
-    "dependencies": {
-        "console.table": "^0.10.0",
-        "inquirer": "^8.2.4",
-        "mysql2": "^3.3.3",
-        "node": "^20.2.0"
-    }
+  "name": "tracker-database",
+  "version": "1.0.0",
+  "description": "employee database ",
+  "main": "index.js",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "mysql2": "^3.3.3",
+    "node": "^20.2.0",
+    "inquirer": "^8.2.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AraelT8/Tracker-Database.git"
+  },
+  "author": "AraelT8",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AraelT8/Tracker-Database/issues"
+  },
+  "homepage": "https://github.com/AraelT8/Tracker-Database#readme"
 }

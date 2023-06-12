@@ -27,5 +27,5 @@ VALUES
 (5, "Jihyo", "Park", 5, 2),
 (6, "Mina", "Myoi", 6, 3),
 (7, "Dahyun", "Kim", 7, 2),
-(8, "Chaeyoung", "Son", 3, 3),
-(9, "Tzuyu", "Chou", 4, 2);
+(8, "Chaeyoung", "Son", 3, 3);
+

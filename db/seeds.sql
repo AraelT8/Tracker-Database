@@ -1,3 +1,4 @@
+-- Seed data to populate tables
 USE company;
 
 INSERT INTO department(id, name)

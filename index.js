@@ -1,11 +1,13 @@
+// Initialize modules
 const inquirer = require("inquirer");
 const db = require("./db");
 require("console.table");
-
+// Exit the application 
 const exit = () => {
   console.log("Thank you for using the Employee Tracker!");
   process.exit(0);
 };
+// main menu function that prompts the user to select an option from the list of choices
 const mainMenu = async () => {
   const answer = await inquirer.prompt([
     {
@@ -34,7 +36,7 @@ const mainMenu = async () => {
 
   answer.menu();
 };
-
+// functions that are called when the user selects an option from the main menu and returns the relevant data 
 function viewDepartments() {
   db.findAllDepartments().then(([rows]) => {
     console.table(rows);
@@ -55,7 +57,7 @@ function viewRoles() {
     return mainMenu();
   });
 }
-
+// function that validates user input if they enter a value or not 
 function validateInput(value) {
   if (value) {
     return true;
@@ -64,7 +66,7 @@ function validateInput(value) {
     return false;
   }
 }
-
+// functions that add a department, role, or employee to the database
 const addDepartment = async () => {
   const answer = await inquirer.prompt([
     {
@@ -118,7 +120,7 @@ const addRole = async () => {
     });
   });
 };
-
+// function that converts the employee id and name into an object 
 function mapEmployeeChoices({ id, name }) {
   return { name, value: id };
 }
@@ -182,7 +184,7 @@ const addEmployee = async () => {
     });
   });
 };
-
+// functions that update an employee's role or manager
 const updateEmployeeRole = async () => {
   const [rowsA] = await db.findAllRoles();
   console.table(rowsA);
@@ -254,7 +256,7 @@ const updateEmployeeManager = async () => {
     });
   });
 };
-
+// function that sorts employees by manager or department 
 const viewByManager = async () => {
   const [allEmployees] = await db.findAllEmployees();
   const managerChoices = allEmployees.map(mapEmployeeChoices);
@@ -290,7 +292,7 @@ const viewByDepartment = async () => {
   console.table(departmentEmployees);
   return mainMenu();
 };
-
+// functions that delete a department, role, or employee
 const deleteDepartment = async () => {
   const [allDepartments] = await db.findAllDepartments();
   console.table(allDepartments);
@@ -365,7 +367,7 @@ const deleteEmployee = async () => {
       });
   });
 };
-
+// function that view the total utilized budget of a department
 const budgetByDepartment = async () => {
 
   const [departmentBudget] = await db.findDepartmentBudget();
